@@ -1,5 +1,8 @@
 # vite-annotate
 
+[![npm](https://img.shields.io/npm/v/vite-annotate?label=npm)](https://npmx.dev/package/vite-annotate)
+[![License: MIT](https://img.shields.io/npm/l/vite-annotate)](./LICENSE.md)
+
 **Point at your running app, write what should change, let your coding agent do it.**
 
 vite-annotate adds an overlay to your Vite dev server. Click an element, write a note. The note knows
@@ -26,9 +29,19 @@ each note with a reply you see on the page.
 
 ## Quick start
 
+Install [`vite-annotate`](https://npmx.dev/package/vite-annotate) as a dev dependency:
+
 ```sh
 pnpm add -D vite-annotate
+# or
+npm install -D vite-annotate
+# or
+yarn add -D vite-annotate
+# or
+bun add -d vite-annotate
 ```
+
+Every version is published from GitHub Actions, with [provenance](https://docs.npmjs.com/generating-provenance-statements).
 
 ```ts
 // vite.config.ts
