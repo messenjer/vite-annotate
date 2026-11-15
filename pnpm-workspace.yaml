@@ -1,0 +1,28 @@
+minimumReleaseAgeExcludePrune: true
+
+# Install scripts pnpm may run. simple-git-hooks' own postinstall is not needed:
+# `prepare` installs the hooks.
+# devframe ships often, and the version this package is built against can be
+# younger than pnpm's maturity window (minimumReleaseAge). Exempt it on purpose,
+# version by version, and drop each line once that release has aged.
+minimumReleaseAgeExclude:
+  - '@devframes/vite@1.3.5'
+  - devframe@1.3.5
+  - '@devframes/agentic@1.3.5'
+
+trustPolicy: no-downgrade
+shellEmulator: true
+
+allowBuilds:
+  simple-git-hooks: false
+
+# Agent skills pnpm links into `.claude/skills/` from the
+# installed packages, so they always match the versions in the lockfile.
+permissions:
+  '@vitejs/devtools-kit':
+    skills: true
+  devframe:
+    skills: true
+  # Declined: the build config is small and stable.
+  tsdown:
+    skills: false

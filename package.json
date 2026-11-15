@@ -1,0 +1,108 @@
+{
+  "name": "vite-annotate",
+  "version": "0.0.0",
+  "description": "Annotate your Vite app in the browser, hand the notes to your coding agent over MCP. Knows the exact .vue file and line of what you clicked.",
+  "keywords": [
+    "agent",
+    "annotation",
+    "claude-code",
+    "devframe",
+    "devtools",
+    "mcp",
+    "vite",
+    "vue"
+  ],
+  "homepage": "https://github.com/messenjer/vite-annotate#readme",
+  "bugs": "https://github.com/messenjer/vite-annotate/issues",
+  "license": "MIT",
+  "author": "Mathieu Laurent <mathieu.laurent@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/messenjer/vite-annotate.git"
+  },
+  "bin": {
+    "vite-annotate": "./dist/cli.mjs"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "skills"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./client": "./dist/client.mjs",
+    "./devframe": "./dist/devframe.mjs",
+    "./devtools-action": "./dist/devtools-action.mjs",
+    "./vite": "./dist/vite.mjs",
+    "./vite-devtools": "./dist/vite-devtools.mjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "play": "vite playground",
+    "play:devtools": "vite playground --config playground/vite.devtools.config.ts",
+    "lint": "oxlint",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "check": "pnpm fmt:check && pnpm lint && pnpm typecheck && pnpm test --run && pnpm build",
+    "release": "bumpp",
+    "prepare": "simple-git-hooks",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@devframes/agentic": "1.3.5",
+    "@devframes/vite": "1.3.5",
+    "@valibot/to-json-schema": "^1.8.0",
+    "cac": "^7.1.0",
+    "devframe": "1.3.5",
+    "magic-string": "^1.4.5",
+    "valibot": "1.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "@vitejs/devtools": "0.8.2",
+    "@vitejs/devtools-kit": "0.8.2",
+    "@vitejs/plugin-vue": "^6.0.11",
+    "bumpp": "^12.3.0",
+    "nano-staged": "^1.0.2",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "oxlint-tsgolint": "^7.0.2007",
+    "pkg-pr-new": "^0.0.93",
+    "publint": "^0.3.25",
+    "simple-git-hooks": "^2.14.0",
+    "tsdown": "0.23.7",
+    "typescript": "5.9.3",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0",
+    "vue": "^3.5.45"
+  },
+  "peerDependencies": {
+    "@vitejs/devtools-kit": "^0.8.2",
+    "vite": "^7.0.0 || ^8.0.0",
+    "vue": "^3.5.0"
+  },
+  "peerDependenciesMeta": {
+    "@vitejs/devtools-kit": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm nano-staged"
+  },
+  "nano-staged": {
+    "*.{ts,js,vue,json,md,yml,yaml}": "oxfmt --no-error-on-unmatched-pattern",
+    "*.{ts,js,vue}": "oxlint --fix"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@12.11.2"
+}
