@@ -1,6 +1,6 @@
 {
   "name": "vite-annotate",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Annotate your Vite app in the browser, hand the notes to your coding agent over MCP. Knows the exact .vue file and line of what you clicked.",
   "keywords": [
     "agent",
