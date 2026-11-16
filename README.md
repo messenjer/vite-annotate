@@ -183,6 +183,12 @@ in [AGENTS.md](./AGENTS.md).
 Built on [devframe](https://devfra.me) and [Vite DevTools](https://devtools.vite.dev). The layout of
 the devframe and its agent tools follows [x18n](https://github.com/x18n-dev/x18n).
 
+## Dedication
+
+vite-annotate was written during Belgium – Italy, on 15 November 2026, as Romelu Lukaku brought his
+international career to a close. This one is for Big Rom: Belgium's all-time top scorer, and every
+goal in the red shirt. Merci, Romelu.
+
 ## License
 
 [MIT](./LICENSE.md) © Mathieu Laurent
