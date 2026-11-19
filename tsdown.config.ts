@@ -4,7 +4,7 @@ import { defineConfig } from 'tsdown'
 // overlay comes from a second, browser build.
 export default defineConfig([
   {
-    entry: ['src/devframe.ts', 'src/vite.ts', 'src/vite-devtools.ts', 'src/cli.ts'],
+    entry: ['src/devframe.ts', 'src/vite.ts', 'src/vite-devtools.ts', 'src/nuxt.ts', 'src/cli.ts'],
     platform: 'node',
     dts: true,
     publint: true,

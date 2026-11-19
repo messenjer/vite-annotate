@@ -12,16 +12,17 @@ server hands the notes to the agent.
 ## 1. Look at the project
 
 Find the Vite config (`vite.config.*`), the package manager (lockfile), whether `@vitejs/plugin-vue`
-is in it, and whether `@vitejs/devtools` is installed with `devtools` set in the config.
+is in it, and whether `@vitejs/devtools` is installed with `devtools` set in the config. A Nuxt app
+has `nuxt.config.*` instead.
 
 The source locations come from `.vue` templates: in a project without Vue, notes still work, without
-file and line. Nuxt is untested: say so before going on.
+file and line.
 
 Done when you know the config file, the package manager and both answers.
 
 ## 2. Ask, in one message
 
-- **Where the toggle lives**: a floating **✎ Annotate** button (`vite-annotate/vite`), or a button in
+- **Where the toggle lives** (not for Nuxt: skip this question): a floating **✎ Annotate** button (`vite-annotate/vite`), or a button in
   the Vite DevTools dock (`vite-annotate/vite-devtools`). Offer the dock only when Vite DevTools is
   already set up; recommend the floating button otherwise.
 - **Which agents** to connect: Claude Code, Codex, Cursor, VS Code, OpenCode, or another MCP client.
@@ -41,7 +42,15 @@ export default defineConfig({
 `annotate()` goes **first** in `plugins`, before any plugin that rewrites `.vue` files (vue-router's
 `definePage()`, for one): it stamps each element with its line in the file as written.
 
-Done when the plugin is the first entry of `plugins`.
+In a Nuxt app, add the module instead, and touch no Vite config:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['vite-annotate/nuxt'],
+})
+```
+
+Done when the plugin is the first entry of `plugins`, or the module is in `modules`.
 
 ## 4. Connect the agents
 

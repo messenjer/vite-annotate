@@ -133,6 +133,22 @@ export default defineConfig({
 
 Use one entry or the other, not both.
 
+## Nuxt
+
+Nuxt 4: add the module instead of the Vite plugin. Options go under `annotate`.
+
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['vite-annotate/nuxt'],
+  // annotate: { auth: false },
+})
+```
+
+The module loads the overlay with a client plugin, since Nuxt serves no `index.html`. Paths and
+notes start from the project root, not from `app/`, so run `vite-annotate mcp` there. Dev only:
+`nuxt build` stays untouched.
+
 ## How it works
 
 ```
@@ -153,6 +169,7 @@ Use one entry or the other, not both.
 - **One definition, three hosts.** The same [devframe](https://devfra.me) definition runs bridged on
   your dev server (`vite-annotate/vite`), mounted in the Vite DevTools hub
   (`vite-annotate/vite-devtools`), and as a stdio MCP server (`vite-annotate mcp`).
+  `vite-annotate/nuxt` registers the first one in a Nuxt app.
 - **One file.** The dev server and the MCP process share `.vite-annotate/annotations.json`. The dev
   server watches it and bumps a shared revision, so every open page follows changes from the agent.
 
@@ -170,7 +187,8 @@ Use one entry or the other, not both.
 ## Limitations
 
 - File and line come from `.vue` templates. Other pages still take notes, without the source location.
-- Nuxt is untested.
+- Nuxt: tested on Nuxt 4 with its default layout, without Nuxt DevTools. The link printed with the
+  code lacks the port: type the code instead.
 - Vite 7 or 8. The Vite DevTools entry needs Vite 8.3+ and `@vitejs/devtools` 0.8.
 
 ## Development

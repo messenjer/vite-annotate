@@ -30,18 +30,19 @@ house style.
 
 ## Layout
 
-| Path                                      | Holds                                                                                     |
-| ----------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `src/devframe.ts`                         | The devframe definition: wires the store, RPC, agent tools and the shared `revision`.     |
-| `src/node/`                               | Node side: the store, RPC for the page, MCP tools, schemas, the `.vue` source stamp.      |
-| `src/vite.ts`                             | `vite-annotate/vite`: stamp, devframe bridge on the dev server, overlay injection.        |
-| `src/vite-devtools.ts`                    | `vite-annotate/vite-devtools`: the same inside the Vite DevTools hub, with a dock toggle. |
-| `src/constants.ts`                        | Names the dev server and the page share: the source attribute, the base, the dock id.     |
-| `src/client.ts`, `src/devtools-action.ts` | Browser entries of the two modes; both mount `src/client/overlay.ts`.                     |
-| `src/cli.ts`                              | `vite-annotate mcp`, the stdio MCP server.                                                |
-| `skills/`                                 | Skills shipped in the package, for agents of projects that use vite-annotate.             |
-| `docs/mcp.md`                             | Client configs and the tool reference, shipped in the package.                            |
-| `playground/`                             | A Vue app with the plugin from `src/`: `pnpm play`, `pnpm play:devtools`.                 |
+| Path                                      | Holds                                                                                        |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `src/devframe.ts`                         | The devframe definition: wires the store, RPC, agent tools and the shared `revision`.        |
+| `src/node/`                               | Node side: the store, RPC for the page, MCP tools, schemas, the `.vue` source stamp.         |
+| `src/vite.ts`                             | `vite-annotate/vite`: stamp, devframe bridge on the dev server, overlay injection.           |
+| `src/vite-devtools.ts`                    | `vite-annotate/vite-devtools`: the same inside the Vite DevTools hub, with a dock toggle.    |
+| `src/nuxt.ts`                             | `vite-annotate/nuxt`: the Vite plugin from the project root, the overlay as a client plugin. |
+| `src/constants.ts`                        | Names the dev server and the page share: the source attribute, the base, the dock id.        |
+| `src/client.ts`, `src/devtools-action.ts` | Browser entries of the two modes; both mount `src/client/overlay.ts`.                        |
+| `src/cli.ts`                              | `vite-annotate mcp`, the stdio MCP server.                                                   |
+| `skills/`                                 | Skills shipped in the package, for agents of projects that use vite-annotate.                |
+| `docs/mcp.md`                             | Client configs and the tool reference, shipped in the package.                               |
+| `playground/`                             | A Vue app with the plugin from `src/`: `pnpm play`, `pnpm play:devtools`.                    |
 
 devframe's and the Vite DevTools kit's own skills are linked into `.claude/skills/` by pnpm on install:
 read them before changing how the devframe is defined, mounted or exposed.
