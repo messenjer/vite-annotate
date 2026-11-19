@@ -24,7 +24,8 @@ export interface AnnotateOptions extends AnnotateDevframeOptions {
   auth?: boolean
 }
 
-const CLIENT_ID = 'virtual:vite-annotate/client'
+/** The overlay's module, for hosts without an `index.html` to inject it into (Nuxt). */
+export const CLIENT_ID = 'virtual:vite-annotate/client'
 
 /**
  * Annotate a Vite app from the browser: an overlay to click an element and leave a note, the
@@ -37,6 +38,7 @@ export default function annotate(options: AnnotateOptions = {}): Plugin[] {
   // The bridge starts devframe in `process.cwd()`. Read lazily by the devframe's setup, once the
   // dev server starts: the notes then live at Vite's root, the root the stamp's paths start from.
   const devframeOptions: AnnotateDevframeOptions = { root: options.root }
+  let base = '/'
   return [
     ...(options.vueSource === false ? [] : [vueSourcePlugin(options.root)]),
     {
@@ -44,12 +46,13 @@ export default function annotate(options: AnnotateOptions = {}): Plugin[] {
       apply: 'serve',
       configResolved(config) {
         devframeOptions.root ??= config.root
+        base = config.base
       },
       resolveId: (id) => (id === CLIENT_ID ? browserEntry('client') : undefined),
       transformIndexHtml: () => [
         {
           tag: 'script',
-          attrs: { type: 'module', src: `/@id/${CLIENT_ID}` },
+          attrs: { type: 'module', src: `${base}@id/${CLIENT_ID}` },
           injectTo: 'body',
         },
       ],

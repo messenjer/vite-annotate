@@ -17,10 +17,11 @@ describe('vite-annotate/vite', () => {
     if (root) rmSync(root, { recursive: true, force: true })
   })
 
-  async function start(): Promise<ViteDevServer> {
+  async function start(base?: string): Promise<ViteDevServer> {
     root = mkdtempSync(join(tmpdir(), 'vite-annotate-'))
     server = await createServer({
       root,
+      base,
       configFile: false,
       logLevel: 'silent',
       server: { port: 0 },
@@ -40,5 +41,9 @@ describe('vite-annotate/vite', () => {
     const [url] = (await start()).resolvedUrls!.local
     const response = await fetch(new URL('__annotate/__mcp', url), { method: 'POST' })
     expect(response.status).toBe(404)
+  })
+  it("loads the overlay under Vite's base", async () => {
+    const html = await (await start('/app/')).transformIndexHtml('/', '<html><body></body></html>')
+    expect(html).toContain('src="/app/@id/virtual:vite-annotate/client"')
   })
 })
